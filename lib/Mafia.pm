@@ -14,6 +14,8 @@ extends 'Catalyst';
 
 our $VERSION = 'v0.1.1';
 
+require DateTime;
+
 __PACKAGE__->config(
     name => 'Mafia',
 

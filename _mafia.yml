@@ -1,2 +1,6 @@
 ---
 name: Mafia
+
+# Uncomment the following line and replace XX-XXXXX-X with your
+# Google Analytics ID to use Google Analytics
+#ga: XX-XXXXX-X

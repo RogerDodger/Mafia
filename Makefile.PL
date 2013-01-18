@@ -19,6 +19,9 @@ requires (
 	'Moose' => 0,
 	'namespace::autoclean' => 0,
 	'Config::General' => 0,
+	'Catalyst::View::TT' => 0,
+	'DateTime' => 0,
+	'DateTime::Format::Human::Duration' => 0,
 )
 test_requires 'Test::More' => '0.88';
 catalyst;

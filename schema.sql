@@ -35,7 +35,7 @@ CREATE TABLE group_role (
 );
 
 CREATE TABLE group_setup (
-	group_id  INTEGER REFERENCES groups(id) ON DELETE CASCADE,
+	group_id   INTEGER REFERENCES groups(id) ON DELETE CASCADE,
 	setup_id   INTEGER REFERENCES roles(id) ON DELETE CASCADE,
 	PRIMARY KEY (group_id, setup_id)
 );
@@ -45,7 +45,7 @@ CREATE TABLE setups (
 	user_id  INTEGER PRIMARY KEY,
 	title    TEXT(64),
 	final    BIT(1) DEFAULT 0,
-	open     BIT(1) DEFAULT 1,
+	private  BIT(1) DEFAULT 1,
 	created  TIMESTAMP,
 	updated  TIMESTAMP
 );
@@ -54,15 +54,18 @@ CREATE TABLE games (
 	id        INTEGER PRIMARY KEY,
 	host_id   INTEGER REFERENCES users(id) ON DELETE CASCADE,
 	setup_id  INTEGER REFERENCES setups(id),
+	is_day    BIT(1),
+	gamedate  INTEGER,
 	created   TIMESTAMP
 );
 
 CREATE TABLE players (
 	id       INTEGER PRIMARY KEY,
+	name     TEXT(16),
 	user_id  INTEGER REFERENCES users(id) ON DELETE CASCADE,
 	game_id  INTEGER REFERENCES games(id) ON DELETE CASCADE,
 	role_id  INTEGER REFERENCES roles(id) NOT NULL,
-	team     TEXT,
+	team     INTEGER,
 	life     INTEGER,
 	UNIQUE (user_id, game_id)
 );
