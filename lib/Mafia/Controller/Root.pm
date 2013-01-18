@@ -23,7 +23,7 @@ sub auto :Private {
 
 	$c->stash(
 		title => [ $c->config->{name} ],
-		now   => DateTime->now->set_time_zone('UTC'),
+		now   => DateTime->now,
 		dt    => DateTime->now->subtract(seconds => 47),
 	);
 

@@ -5,23 +5,19 @@ use namespace::autoclean;
 extends 'Catalyst::View::TT';
 
 require Mafia::Helpers;
-require DateTime;
 require DateTime::Format::Human::Duration;
 
 __PACKAGE__->config(
 	TEMPLATE_EXTENSION => '.html',
 	DEFAULT_ENCODING   => 'utf-8',
 	WRAPPER            => 'wrapper.html',
-	expose_methods     => [ qw/html_title simple_uri format_dt/ ],
+	expose_methods     => [ qw/html_title format_dt/ ],
+	FILTERS            => {
+		simple_uri => \&Mafia::Helpers::simple_uri,
+	},
 	render_die         => 1,
 	TIMER              => 1,
 );
-
-sub simple_uri {
-	shift @_ for 0, 1;
-
-	return Mafia::Helpers::simple_uri(@_);
-}
 
 sub html_title {
 	my( $self, $c ) = @_;
@@ -47,7 +43,7 @@ sub format_dt {
 		$dt->set_time_zone('UTC')->strftime($RFC2822), 
 		$dt->iso8601, 
 		DateTime::Format::Human::Duration->new->format_duration_between(
-			DateTime->now,
+			$c->stash->{now},
 			$dt,
 			past => '%s ago',
 			future => 'in %s',

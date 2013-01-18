@@ -15,8 +15,8 @@
 
 		<link rel="icon" href="[% c.uri_for('favicon.ico') %]?v=2">
 
-		<link rel="stylesheet" href="[% c.uri_for('/static/css/normalize.css') %]">
-		<link rel="stylesheet" href="[% c.uri_for('/static/css/mafia-0.01.css') %]">
+		<link rel="stylesheet" href="[% c.uri_for('/static/style/normalize.css') %]">
+		<link rel="stylesheet" href="[% c.uri_for('/static/style/mafia-0.01.css') %]">
 		<script src="[% c.uri_for('/static/js/vendor/modernizr-2.6.2.min.js') %]"></script>
 		[%- END %]
 	</head>
@@ -63,8 +63,8 @@
 				<ul>
 					[%- FOREACH game IN games.all %]
 					<li>
-						#[% game.id %]
-						[% game.setup.title %]
+						<span class="id">#[% game.id %]</span>
+						<span class="setup">[% game.setup.title %]</span>
 					</li>
 					[%- END %]
 				</ul>
@@ -75,8 +75,8 @@
 
 		<footer>
 			<div>
-				[% now.strftime('%a, %d %b %Y %T %Z') %]
-				[% format_dt( dt ) %]
+				<a class="link" href="https://github.com/RogerDodger/Mafia">Mafia.pm</a>
+				[% c.app_version %]
 			</div>
 		</footer>
 

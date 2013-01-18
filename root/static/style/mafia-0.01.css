@@ -90,12 +90,23 @@ textarea {
 }
 
 /* ==========================================================================
-   Author's custom styles
+   Mafia.pm's custom styles
    ========================================================================== */
 
+@font-face {
+    font-family: Entypo;
+    src: 
+        url('fonts/entypo.woff'), 
+        url('fonts/entypo.ttf'), 
+        url('fonts/entypo.svg'), 
+        url('fonts/entypo.eot');
+}
 
-
-
+.icon {
+    font-family: Entypo;
+    line-height: 0;
+    font-size: 2em;
+}
 
 
 

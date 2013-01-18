@@ -31,6 +31,10 @@ __PACKAGE__->config(
 # Start the application
 __PACKAGE__->setup();
 
+sub app_version {
+    return $VERSION;
+}
+
 =head1 NAME
 
 Mafia - Catalyst based application

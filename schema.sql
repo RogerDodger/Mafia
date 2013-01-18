@@ -8,8 +8,9 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE users (
 	id        INTEGER PRIMARY KEY,
 	name      TEXT(16) COLLATE NOCASE UNIQUE NOT NULL,
+	password  TEXT,
 	role_id   INTEGER REFERENCES roles(id) NOT NULL,
-	email     TEXT(256) COLLATE NOCASE UNIQUE NOT NULL,
+	email     TEXT(256) COLLATE NOCASE UNIQUE,
 	email2    TEXT(256),
 	active    BIT(1) DEFAULT 1,
 	verified  BIT(1) DEFAULT 0,

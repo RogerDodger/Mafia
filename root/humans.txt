@@ -3,13 +3,12 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Cameron Thornton <cthor@cpan.org> -- Developer
 
 # THANKS
 
-    <name>
+    Daniel Bruce for the Entypo web icon font -- http://www.entypo.com/
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    jQuery, Modernizr
+	Perl, Catalyst
