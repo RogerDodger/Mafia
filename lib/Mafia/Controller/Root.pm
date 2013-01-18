@@ -22,10 +22,17 @@ The root page (/)
 
 =cut
 
+sub auto :Private {
+	my ( $self, $c ) = @_;
+
+	$c->stash->{title} = [ $c->config->{name} ];
+}
+
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->response->body( 'Working' );
+    push $c->stash->{title}, 'Index';
+    $c->stash->{template} = 'index.html';
 }
 
 =head2 default
@@ -36,7 +43,11 @@ Standard 404 error page
 
 sub default :Path {
     my ( $self, $c ) = @_;
-    $c->response->body( 'Page not found' );
+
+    open HTML, $c->path_to('root', 'src', '404.html');
+    $c->response->body(do { local $/; <HTML> });
+    close HTML;
+
     $c->response->status(404);
 }
 
@@ -50,7 +61,7 @@ sub end : ActionClass('RenderView') {}
 
 =head1 AUTHOR
 
-Cameron,,,
+Cameron Thornton E<lt>cthor@cpan.orgE<gt>
 
 =head1 LICENSE
 

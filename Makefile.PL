@@ -8,15 +8,18 @@ use Module::Install::Catalyst; # Complain loudly if you don't have
 
 name 'Mafia';
 all_from 'lib/Mafia.pm';
+perl_version '5.014';
 
-requires 'Catalyst::Runtime' => '5.90013';
-requires 'Catalyst::Plugin::ConfigLoader';
-requires 'Catalyst::Plugin::Static::Simple';
-requires 'Catalyst::Action::RenderView';
-requires 'Moose';
-requires 'namespace::autoclean';
-requires 'Config::General'; # This should reflect the config file format you've chosen
-                 # See Catalyst::Plugin::ConfigLoader for supported formats
+
+requires (
+	'Catalyst::Runtime' => '5.90013',
+	'Catalyst::Plugin::ConfigLoader' => 0,
+	'Catalyst::Plugin::Static::Simple' => 0,
+	'Catalyst::Action::RenderView' => 0,
+	'Moose' => 0,
+	'namespace::autoclean' => 0,
+	'Config::General' => 0,
+)
 test_requires 'Test::More' => '0.88';
 catalyst;
 
