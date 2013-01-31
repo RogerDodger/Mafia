@@ -1,39 +1,30 @@
 package Mafia;
 use Moose;
 use namespace::autoclean;
+use v5.14;
+
+our $VERSION = 'v0.1.4';
 
 use Catalyst::Runtime 5.80;
 
-use Catalyst qw/
-    -Debug
-    ConfigLoader
-    Static::Simple
-/;
+use Catalyst;
 
 extends 'Catalyst';
 
-our $VERSION = 'v0.1.1';
-
-require DateTime;
-
 __PACKAGE__->config(
-    name => 'Mafia',
-
-    default_view => 'TT',
-	'View::TT' => { 
-		INCLUDE_PATH => [ __PACKAGE__->path_to('root', 'src' ) ],
-	},
-
-    disable_component_resolution_regex_fallback => 1,
-    enable_catalyst_header => 1,
+    %{ Mafia::Config->load },
 );
 
-# Start the application
-__PACKAGE__->setup();
+__PACKAGE__->setup(qw/
+    -Debug
+    Static::Simple
 
-sub app_version {
-    return $VERSION;
-}
+	Session
+	Session::Store::FastMmap
+	Session::State::Cookie
+
+	Authentication
+/);
 
 =head1 NAME
 

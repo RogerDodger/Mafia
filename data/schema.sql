@@ -7,22 +7,31 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE users (
 	id        INTEGER PRIMARY KEY,
+	-- User info
 	name      TEXT(16) COLLATE NOCASE UNIQUE NOT NULL,
-	password  TEXT,
-	role_id   INTEGER REFERENCES roles(id) NOT NULL,
+	password  TEXT NOT NULL,
+	is_admin  BIT(1) DEFAULT 0,
+	is_mod    BIT(1) DEFAULT 0,
 	email     TEXT(256) COLLATE NOCASE UNIQUE,
 	email2    TEXT(256),
 	active    BIT(1) DEFAULT 1,
 	verified  BIT(1) DEFAULT 0,
 	token     TEXT(32),
-	created   TIMESTAMP,
-	updated   TIMESTAMP
+	-- Game stats
+	wins      INTEGER DEFAULT 0,
+	losses    INTEGER DEFAULT 0,
+	ties      INTEGER DEFAULT 0,
+	games     INTEGER DEFAULT 0,
+	-- Timestamps
+	last_mailed TIMESTAMP,
+	created     TIMESTAMP,
+	updated     TIMESTAMP
 );
 
+-- Player roles, e.g., "Townie", "Goon", "Cop"
 CREATE TABLE roles (
 	id    INTEGER PRIMARY KEY,
-	type  INTEGER,
-	role  TEXT
+	name  TEXT
 );
 
 CREATE TABLE groups (
@@ -32,31 +41,35 @@ CREATE TABLE groups (
 CREATE TABLE group_role (
 	group_id  INTEGER REFERENCES groups(id) ON DELETE CASCADE,
 	role_id   INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+	count     INTEGER NOT NULL,
 	PRIMARY KEY (group_id, role_id)
 );
 
 CREATE TABLE group_setup (
 	group_id   INTEGER REFERENCES groups(id) ON DELETE CASCADE,
-	setup_id   INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+	setup_id   INTEGER REFERENCES setups(id) ON DELETE CASCADE,
 	PRIMARY KEY (group_id, setup_id)
 );
 
 CREATE TABLE setups (
-	id       INTEGER PRIMARY KEY,
-	user_id  INTEGER PRIMARY KEY,
-	title    TEXT(64),
-	final    BIT(1) DEFAULT 0,
-	private  BIT(1) DEFAULT 1,
-	created  TIMESTAMP,
-	updated  TIMESTAMP
+	id         INTEGER PRIMARY KEY,
+	user_id    INTEGER REFERENCES users(id) ON DELETE SET NULL,
+	title      TEXT(64),
+	descr      TEXT(2048),
+	day_start  BIT(1) DEFAULT 0,
+	final      BIT(1) DEFAULT 0,
+	private    BIT(1) DEFAULT 1,
+	created    TIMESTAMP,
+	updated    TIMESTAMP
 );
 
 CREATE TABLE games (
 	id        INTEGER PRIMARY KEY,
-	host_id   INTEGER REFERENCES users(id) ON DELETE CASCADE,
+	host_id   INTEGER REFERENCES users(id) ON DELETE SET NULL,
 	setup_id  INTEGER REFERENCES setups(id),
 	is_day    BIT(1),
 	gamedate  INTEGER,
+	end       TIMESTAMP,
 	created   TIMESTAMP
 );
 
@@ -65,17 +78,11 @@ CREATE TABLE players (
 	name     TEXT(16),
 	user_id  INTEGER REFERENCES users(id) ON DELETE CASCADE,
 	game_id  INTEGER REFERENCES games(id) ON DELETE CASCADE,
-	role_id  INTEGER REFERENCES roles(id) NOT NULL,
-	team     INTEGER,
-	life     INTEGER,
+	role_id  INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+	vote_id  INTEGER REFERENCES players(id) ON DELETE SET NULL,
+	team     INTEGER NOT NULL,
+	life     INTEGER DEFAULT 1 NOT NULL,
 	UNIQUE (user_id, game_id)
-);
-
-CREATE TABLE votes (
-	game_id   INTEGER REFERENCES games(id) ON DELETE CASCADE,
-	voter_id  INTEGER REFERENCES players(id) ON DELETE CASCADE,
-	voted_id  INTEGER REFERENCES players(id) ON DELETE CASCADE,
-	PRIMARY KEY (voter_id, voted_id)
 );
 
 CREATE TABLE actions (
@@ -83,6 +90,13 @@ CREATE TABLE actions (
 	actor_id   INTEGER REFERENCES players(id) ON DELETE CASCADE,
 	target_id  INTEGER REFERENCES players(id) ON DELETE CASCADE,
 	PRIMARY KEY (actor_id, target_id)
+);
+
+CREATE TABLE threads (
+	id       INTEGER PRIMARY KEY,
+	board_id INTEGER REFERENCES boards(id) ON DELETE CASCADE,
+	game_id  INTEGER REFERENCES games(id) ON DELETE CASCADE,
+	title    TEXT(64)
 );
 
 CREATE TABLE posts (

@@ -7,8 +7,9 @@
 
 # THANKS
 
-    Daniel Bruce for the Entypo web icon font -- http://www.entypo.com/
+    Daniel Bruce (http://www.entypo.com/) -- Entypo web icon font
+    Jos Buivenga (http://www.exljbris.com/) -- Museo Slab web font
 
 # TECHNOLOGY COLOPHON
 
-	Perl, Catalyst
+    Perl, Catalyst

@@ -6,6 +6,8 @@ BEGIN { extends 'Catalyst::Controller' }
 
 __PACKAGE__->config(namespace => '');
 
+require DateTime;
+
 =head1 NAME
 
 Mafia::Controller::Root - Root Controller for Mafia
@@ -24,39 +26,15 @@ sub auto :Private {
 	$c->stash(
 		title => [ $c->config->{name} ],
 		now   => DateTime->now,
-		dt    => DateTime->now->subtract(seconds => 47),
+		v     => $Mafia::VERSION,
 	);
 
 	$c->stash(
-		games => {
-			count => 1,
-			all => [
-				{
-					setup => { title => 'Something something something' },
-					id => 12,
-				},
-				{
-					setup => { title => 'There Can Be Only One' },
-					id => 42,
-				}
-			],
-		},
-		votes => {
-			all => [
-				{
-					voter => { name => 'RogerDodger' },
-					voted => { name => 'Joe Blow' },
-				},
-				{
-					voter => { name => 'Joe Blow' },
-					voted => { name => 'RogerDodger' },
-				}
-			],
-		},
 		player => {
-			role => 'Villager',
-		},
+			role => 'Townie',
+		}
 	);
+
 }
 
 sub index :Path :Args(0) {
