@@ -46,6 +46,7 @@
 
 				<ul class="public">
 					<li><a href="#">Games</a></li>
+					<li><a href="#">Setups</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Forum</a></li>
 				</ul>
@@ -76,11 +77,12 @@
 
 		<section class="body">
 
-			<section class="content">
+			<section class="content [% 'no-sidebar' IF no_sidebar %]">
 				[% #Indent lines to make the output source look nice
 					content.replace('(?<=\n)', "\t\t\t\t") %]
 			</section>
 
+			[%- UNLESS no_sidebar %]
 			<section class="sidebar">
 
 				<aside class="news">
@@ -94,7 +96,11 @@
 				[%- IF player %]
 				<aside class="player">
 					<h1>Player</h1>
-					<p>You are a [% player.role %]</p>
+					<p>
+						You are a 
+						<span class="role">[% player.role %]</span>
+						<span class="team [% player.team.lcfirst %]">([% player.team %])</span>
+					</p>
 				</aside>
 				[%- END %]
 
@@ -127,6 +133,7 @@
 				[%- END %]
 
 			</section>
+			[%- END %]
 
 			<div class="clearfix"></div>
 		</section>

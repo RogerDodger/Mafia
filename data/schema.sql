@@ -38,11 +38,17 @@ CREATE TABLE groups (
 	id  INTEGER PRIMARY KEY
 );
 
+CREATE TABLE teams (
+	id    INTEGER PRIMARY KEY,
+	name  TEXT
+);
+
 CREATE TABLE group_role (
 	group_id  INTEGER REFERENCES groups(id) ON DELETE CASCADE,
 	role_id   INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+	team_id   INTEGER REFERENCES teams(id) ON DELETE CASCADE,
 	count     INTEGER NOT NULL,
-	PRIMARY KEY (group_id, role_id)
+	PRIMARY KEY (group_id, role_id, team_id)
 );
 
 CREATE TABLE group_setup (
@@ -56,9 +62,14 @@ CREATE TABLE setups (
 	user_id    INTEGER REFERENCES users(id) ON DELETE SET NULL,
 	title      TEXT(64),
 	descr      TEXT(2048),
+	allow_nk   BIT(1) DEFAULT 1,
+	allow_nv   BIT(1) DEFAULT 1,
 	day_start  BIT(1) DEFAULT 0,
 	final      BIT(1) DEFAULT 0,
 	private    BIT(1) DEFAULT 1,
+	-- Stats
+	plays      INTEGER DEFAULT 0,
+	-- Timestamps
 	created    TIMESTAMP,
 	updated    TIMESTAMP
 );
@@ -76,11 +87,11 @@ CREATE TABLE games (
 CREATE TABLE players (
 	id       INTEGER PRIMARY KEY,
 	name     TEXT(16),
-	user_id  INTEGER REFERENCES users(id) ON DELETE CASCADE,
+	user_id  INTEGER REFERENCES users(id) ON DELETE SET NULL,
 	game_id  INTEGER REFERENCES games(id) ON DELETE CASCADE,
-	role_id  INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+	role_id  INTEGER REFERENCES roles(id) ON DELETE RESTRICT,
 	vote_id  INTEGER REFERENCES players(id) ON DELETE SET NULL,
-	team     INTEGER NOT NULL,
+	team_id  INTEGER REFERENCES teams(id) ON DELETE RESTRICT NOT NULL,
 	life     INTEGER DEFAULT 1 NOT NULL,
 	UNIQUE (user_id, game_id)
 );
@@ -94,7 +105,7 @@ CREATE TABLE actions (
 
 CREATE TABLE threads (
 	id       INTEGER PRIMARY KEY,
-	board_id INTEGER REFERENCES boards(id) ON DELETE CASCADE,
+	board_id INTEGER REFERENCES boards(id) ON DELETE SET NULL,
 	game_id  INTEGER REFERENCES games(id) ON DELETE CASCADE,
 	title    TEXT(64)
 );
@@ -103,6 +114,7 @@ CREATE TABLE posts (
 	id        INTEGER PRIMARY KEY,
 	thread_id INTEGER REFERENCES threads(id) ON DELETE CASCADE,
 	user_id   INTEGER REFERENCES users(id) ON DELETE SET NULL,
+	is_op     BIT(1) DEFAULT 0,
 	class     TEXT,
 	body      TEXT,
 	created   TIMESTAMP,

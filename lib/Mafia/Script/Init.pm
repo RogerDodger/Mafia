@@ -15,7 +15,7 @@ sub run {
 
 	my $fn = (split ":", $self->config->{"Model::DB"}{connect_info}{dsn})[-1];
 	if( -e $fn ) {
-		print "Database file already exists. Overwrite? [y] ";
+		print "Database file already exists. Initialisation will overwrite it. Continue? [y] ";
 		if( <STDIN> =~ /n/i ) {
 			exit(0);
 		}
@@ -33,12 +33,19 @@ sub run {
 
 	my $schema = $self->schema;
 
+	print "Admin username: ";
+	chomp(my $admin = <STDIN>);
+
+	say "Creating admin account `$admin` with password `admin`";
+
 	$schema->resultset('User')->create({
-		name     => 'admin',
+		name     => $admin,
 		password => 'admin',
 		is_admin => 1,
 		is_mod   => 1,
 	});
+
+	$schema->resultset('Team')->create({ name => $_ }) for qw/Town Mafia Nomad Bratva Yakuza/;
 
 	Catalyst::ScriptRunner->run('Mafia', 'UpdateRoles');
 }

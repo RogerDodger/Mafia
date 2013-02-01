@@ -32,9 +32,13 @@ sub auto :Private {
 	$c->stash(
 		player => {
 			role => 'Townie',
+			team => 'Town',
 		}
 	);
 
+	$c->stash->{no_sidebar} = $c->req->param('no_sidebar');
+
+	1;
 }
 
 sub index :Path :Args(0) {

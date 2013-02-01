@@ -116,10 +116,6 @@ textarea {
 	        border-radius: @args;
 }
 
-@site-width:    1060px;
-@aside-width:   240px;
-@content-width: (@site-width - @aside-width - 40px);
-
 @font-face {
 	font-family: Entypo;
 	src: 
@@ -146,6 +142,14 @@ textarea {
 
 h1 {
 	font-family: "Museo Slab", Georgia, serif;
+}
+
+@site-width:    1000px;
+@aside-width:   240px;
+@content-width: (@site-width - @aside-width - 40px);
+
+body {
+	min-width: (@site-width + 80px);
 }
 
 nav.top {
@@ -232,10 +236,15 @@ section.body {
 		float: left;
 		width: @content-width;
 
+		&.no-sidebar {
+			width: @site-width;
+		}
+
 		h1 {
 			font-weight: normal;
 		}
 
+		margin-bottom: 1em;
 	}
 
 	section.sidebar {
@@ -251,8 +260,41 @@ section.body {
 				background-color: #f7f7f7;
 			}
 
+
 			p {
-				padding: 0.5em 1em;
+				font-size: 0.8em;
+				padding: 0.625em 1.25em;
+			}
+
+			&.player {
+
+				p {
+					color: #aaa;
+
+					.role {
+						color: #222;
+					}
+
+					.team {
+
+						&.town {
+							color: green;
+						}
+
+						&.mafia,
+						&.yakuza,
+						&.brakva {
+							color: red;
+						}
+
+						&.nomad {
+							color: orange;
+						}
+
+					}
+
+				}
+
 			}
 
 			border: 1px solid #ddd;
@@ -269,7 +311,7 @@ footer {
 	div.container {
 		width: @site-width;
 		margin: 0 auto;
-		padding: 2em 2em;
+		padding: 2em;
 		border-top: 1px solid #e5e5e5;
 	}
 
@@ -301,7 +343,7 @@ footer {
 		}
 	}
 
-	border-bottom: 40em solid #e6e6e6;
+	border-bottom: 30em solid #e6e6e6;
 
 }
 

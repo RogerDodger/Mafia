@@ -1,4 +1,4 @@
-Mafia.pm Changelog
+Mafia.pm changelog
 ==================
 
 v0.1 - 13 Dec 2012

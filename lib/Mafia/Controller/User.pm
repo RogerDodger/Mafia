@@ -35,7 +35,7 @@ sub logout :Local :Args(0) {
 	my ( $self, $c ) = @_;
 
 	$c->logout;
-
+	
 	$c->res->redirect( $c->req->referer || $c->uri_for('/') );
 }
 
