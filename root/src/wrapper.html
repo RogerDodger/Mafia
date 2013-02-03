@@ -75,11 +75,11 @@
 			</div>
 		</nav>
 
-		<section class="body">
-
+		<article class="main">
 			<section class="content [% 'no-sidebar' IF no_sidebar %]">
-				[% #Indent lines to make the output source look nice
-					content.replace('(?<=\n)', "\t\t\t\t") %]
+
+[% content %]
+
 			</section>
 
 			[%- UNLESS no_sidebar %]
@@ -136,7 +136,7 @@
 			[%- END %]
 
 			<div class="clearfix"></div>
-		</section>
+		</article>
 
 		<footer>
 			<div class="container">

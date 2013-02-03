@@ -1,0 +1,47 @@
+<article class="post [% post.class %]" id="[% loop.count || post.id %]">
+	<div class="meta">
+		<div class="poster">
+			[%- IF post.show_username %]
+			<span class="name">
+				<a href="[% c.uri_for('/user/' _ post.user.name) %]">[% post.user.name %]</a>
+			</span>
+			[%- END %]
+			[%- IF post.player.alias %]
+			<span class="alias">[% post.player.alias | html %]</span>
+			[%- END %]
+		</div>
+
+		[%- IF post.gamedate %]
+		<div class="gamedate">[% post.gamedate %]</div>
+		[%- END %]
+
+		<div class="posttime">[% post.created.duration_since_now %]</div>
+
+		<div class="permalink">
+			<a href="[% c.uri_for('/post/' _ post.id ) %]">#[% loop.count || post.id %]</a>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="body">[% post.body | html | markdown %]</div>
+
+	<div class="footer">
+		<ul class="controls">
+			<li class="reply">
+				<a href="#">
+					<span class="icon">&#59154;</span>
+					Reply
+				</a>
+			</li>
+			<li class="report">
+				<a href="#">
+					<span class="icon">&#9888;</span>
+					Report
+				</a>
+			</li>
+		</ul>
+		
+		<div class="clearfix"></div>
+	</div>
+</article>

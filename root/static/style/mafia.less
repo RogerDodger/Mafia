@@ -146,7 +146,7 @@ h1 {
 
 @site-width:    1000px;
 @aside-width:   240px;
-@content-width: (@site-width - @aside-width - 40px);
+@content-width: (@site-width - @aside-width - 32px);
 
 body {
 	min-width: (@site-width + 80px);
@@ -227,7 +227,7 @@ nav.top {
 
 }
 
-section.body {
+article.main {
 
 	width: @site-width;
 	margin: 1em auto;
@@ -242,6 +242,147 @@ section.body {
 
 		h1 {
 			font-weight: normal;
+		}
+
+		.posts {
+
+			h1 {
+				margin: 0;
+				padding: 0.5em 1.5em;
+				font-size: 1.4em;
+
+				background-color: #f7f7f7;
+
+				.icon {
+					position: relative;
+					top: 0.12em;
+				}
+			}
+
+			border: 1px solid #ddd;
+			.border-radius(4px 4px 0 0);
+
+			article.post {
+
+				padding: 0.01em 1em;
+				position: relative;
+
+				& + article.post {
+					border-top: 1px solid #ddd;
+				}
+
+				font-size: 0.9em;
+
+				&.system {
+					background-color: #f7f7f7;
+				}
+
+				&.day .gamedate:before {
+					content: "\1F506";
+				}
+				&.night .gamedate:before {
+					content: "\263D";
+				}
+
+				.meta,
+				.body,
+				.footer {
+					margin: 1em 0;
+				}
+
+				.meta,
+				.footer {
+					font-size: 0.8em;
+					color: #888;
+
+					a {
+						text-decoration: none;
+						color: inherit;
+					}
+				}
+
+				.meta {
+					a {
+						font-weight: bold;
+					}
+
+					.poster,
+					.gamedate,
+					.posttime {
+						float: left;
+						margin-right: 0.8em;
+					}
+
+					.gamedate:before {
+						.icon;
+						position: relative;
+						top: 0.12em;
+					}
+
+					.poster {
+						.name + .alias {
+							&:before {
+								content: "(";
+							}
+							&:after {
+								content: ")";
+							}
+						}
+					}
+
+					.permalink {
+						float: right;
+					}
+				}
+
+				.footer {
+					ul.controls {
+						float: right;
+
+						list-style-type: none;
+						padding: 0;
+						margin: 0;
+
+						li {
+							float: left;
+
+							.icon {
+								position: relative;
+								top: 0.1em;
+							}
+
+							& + li {
+								margin-left: 0.6em;
+							}
+						}
+					}
+				}
+
+				&:hover {
+					.meta {
+						a {
+							color: #48b;
+
+							&:hover {
+								text-decoration: underline;
+							}
+						}
+					}
+
+					.footer {
+						.controls {
+							a {
+								color: #666;
+
+								&:hover {
+									color: #222;
+								}
+							}
+						}
+					}
+				}
+			}
+
 		}
 
 		margin-bottom: 1em;
@@ -300,7 +441,7 @@ section.body {
 			border: 1px solid #ddd;
 			.border-radius(4px 4px 0 0);
 
-			margin-bottom: 2em;
+			margin: 1em 0;
 		}
 	}
 

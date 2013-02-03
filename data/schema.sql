@@ -117,6 +117,7 @@ CREATE TABLE posts (
 	is_op     BIT(1) DEFAULT 0,
 	class     TEXT,
 	body      TEXT,
+	gamedate  INTEGER,
 	created   TIMESTAMP,
 	updated   TIMESTAMP
 );
