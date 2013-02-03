@@ -3,7 +3,7 @@ use Moose;
 use namespace::autoclean;
 use v5.14;
 
-our $VERSION = 'v0.2.0';
+our $VERSION = 'v0.2.1';
 
 use Catalyst::Runtime 5.80;
 

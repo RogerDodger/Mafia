@@ -8,7 +8,6 @@ v0.2 - 03 Feb 2013
   - Site is fixed width and utilises floats
     - Surprisingly nice to work with when you do it right (which I hope I am)
   - May use javascript to shrink it for short screens
-
 - Initial work on post/thread template & style
   - Posts have durations listed for their timestamps
   - Using sun/moon symbols to show game date and day/night
