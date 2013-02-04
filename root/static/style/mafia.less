@@ -140,6 +140,45 @@ textarea {
 	font-size: 2.5em;
 }
 
+.maxwidth {
+	width: 100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.reset {
+	outline: 0;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+.button {
+	.reset;
+	padding: 0.6em 0.8em;
+	cursor: pointer;
+
+	font-family: "Museo Slab", Georgia, serif;
+	background-color: #fff;
+	box-shadow: 0 1px rgba(255, 255, 255, 0.6) inset;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	.border-radius(4px);
+
+	&:hover {
+		border: 1px solid rgba(0, 0, 0, 0.3);
+		.background-gradient(#e5e5e5, #fff);
+		position: relative;
+		z-index: 1;
+	}
+
+	&:active {
+		.background-gradient(#fff, #e5e5e5);
+		border: 1px solid rgba(0, 0, 0, 0.15);
+	}
+}
+
 h1 {
 	font-family: "Museo Slab", Georgia, serif;
 }
@@ -379,6 +418,83 @@ article.main {
 								}
 							}
 						}
+					}
+				}
+			}
+
+		}
+
+		.add_post {
+
+			border: 1px solid #ddd;
+			.border-radius(4px 4px 0 0);
+			margin: 1em 0;
+
+			.editor {
+				padding: 0.01em 1em;
+				border-bottom: 1px solid #ddd;
+				background-color: #f7f7f7;
+
+				ul {
+					list-style-type: none;
+					padding: 0;
+					font-size: 0.8em;
+					line-height: 1.2em;
+
+					li {
+						.button;
+						float: left;
+						margin-left: -1px;
+						width: 1em;
+						text-align: center;
+
+						.border-radius(0);
+						&:first-of-type {
+							.border-radius(4px 0 0 4px);
+						}
+						&:last-of-type {
+							.border-radius(0 4px 4px 0);
+						}
+
+						&.b {
+							font-weight: bold;
+						}
+						&.i {
+							font-style: italic;
+						}
+
+						.icon {
+							position: relative;
+							top: 0.12em;
+							left: -0.04em;
+						}
+
+						&.q .icon {
+							left: -0.12em;
+						}
+					}
+				}
+			}
+
+			textarea {
+				.reset;
+				.maxwidth;
+				height: 12em;
+				padding: 0.5em;
+				color: #444;
+			}
+
+			.buttons {
+				padding: 1em;
+				background-color: #f7f7f7;
+				border-top: 1px solid #e5e5e5;
+
+				button {
+					.button;
+
+					.icon {
+						position: relative;
+						top: 0.12em;
 					}
 				}
 			}

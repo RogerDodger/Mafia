@@ -1,0 +1,9 @@
+<section class="posts">
+	<h1>
+		<span class="icon">&#59160;</span>
+		Posts
+	</h1>
+	[%- FOREACH post IN posts.all %]
+		[% INCLUDE post.html %]
+	[%- END %]
+</section>

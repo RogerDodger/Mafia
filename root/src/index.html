@@ -5,12 +5,7 @@
 <p>
 	Maecenas vel nisi libero. Nam at sagittis est. Suspendisse nec sapien eros, id pretium enim. Donec quis nibh sapien. Curabitur leo eros, elementum eu pharetra vitae, sollicitudin vitae augue. Nunc a gravida mi. Sed vitae sapien leo, faucibus tincidunt nulla. Curabitur blandit dui vitae urna egestas pellentesque. Proin vehicula ullamcorper placerat. 
 </p>
-<div class="posts">
-	<h1>
-		<span class="icon">&#59160;</span>
-		Posts
-	</h1>
-	[%- FOREACH post IN posts.all %]
-[% INCLUDE post.html %]
-	[%- END %]
-</div>
+
+[% INCLUDE post/list.html %]
+
+[% INCLUDE post/submit.html %]

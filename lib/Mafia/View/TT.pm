@@ -7,13 +7,14 @@ extends 'Catalyst::View::TT';
 require Mafia::Helpers;
 require Mafia::DateTime;
 require Text::Markdown;
+use HTML::Tidy;
 
 __PACKAGE__->config(
 	TEMPLATE_EXTENSION => '.html',
 	DEFAULT_ENCODING   => 'utf-8',
-	WRAPPER            => 'wrapper.html',
 	expose_methods     => [ qw/html_title/ ],
 	render_die         => 1,
+	WRAPPER            => 'wrapper.html',
 	TIMER              => 1,
 	FILTERS            => {
 		simple_uri => \&Mafia::Helpers::simple_uri,
@@ -21,6 +22,17 @@ __PACKAGE__->config(
 		markdown   => Text::Markdown->new->can('markdown'),
 	},
 );
+
+my $tidy = HTML::Tidy->new({
+	new_blocklevel_tags => 'article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary',
+	new_inline_tags     => 'time',
+	preserve_entities   => 1,
+	char_encoding       => 'utf8',
+	output_html         => 1, 
+	tidy_mark           => 0,
+	indent              => 1,
+	wrap                => 110,
+});
 
 sub html_title {
 	my( $self, $c ) = @_;
@@ -34,6 +46,15 @@ sub html_title {
 		return Template::Filters::html_filter( $title || $c->stash->{name} );
 	}
 }
+
+after 'process' => sub {
+	my( $self, $c ) = @_;
+
+	my $clean = $tidy->clean($c->res->body);
+	$c->res->body($clean);
+
+	1;
+};
 
 =head1 NAME
 
