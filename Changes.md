@@ -1,6 +1,14 @@
 Mafia.pm changelog
 ==================
 
+v0.3
+----
+
+- post/submit.html (and associated style) mostly complete
+  - Bold/italics/quote/link buttons working
+  - Reply buttons working
+  - Post preview working
+
 v0.2 - 03 Feb 2013
 ------------------
 

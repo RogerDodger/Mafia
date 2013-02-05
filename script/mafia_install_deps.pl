@@ -34,3 +34,6 @@ SQL::Script
 DBIx::Class
 DBIx::Class::TimeStamp
 DBIx::Class::PassphraseColumn
+Text::Markdown
+Alien::Tidyp 1.4.7
+HTML::Tidy 1.54

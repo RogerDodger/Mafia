@@ -116,7 +116,8 @@ CREATE TABLE posts (
 	user_id   INTEGER REFERENCES users(id) ON DELETE SET NULL,
 	is_op     BIT(1) DEFAULT 0,
 	class     TEXT,
-	body      TEXT,
+	plain     TEXT,
+	render    TEXT,
 	gamedate  INTEGER,
 	created   TIMESTAMP,
 	updated   TIMESTAMP

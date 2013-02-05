@@ -49,14 +49,14 @@ sub auto :Private {
 				show_username => 1,
 				class => 'day',
 				gamedate => 1,
-				body => $lorem->paragraphs(2),
+				plain => $lorem->paragraphs(2),
 				created => DateTime->now->subtract(hours => 2, minutes => 4, seconds => 57),
 			}, 
 			{
 				id => 3,
 				class => 'day system',
 				gamedate => 1,
-				body => $lorem->sentence,
+				plain => $lorem->sentence,
 				created => DateTime->now->subtract(hours => 1, minutes => 3, seconds => 32),
 			},
 			{
@@ -69,7 +69,7 @@ sub auto :Private {
 				},
 				class => 'day',
 				gamedate => 1,
-				body => $lorem->paragraphs(3),
+				plain => $lorem->paragraphs(3),
 				created => DateTime->now->subtract(hours => 1, minutes => 14, seconds => 2),
 			},
 			{
@@ -80,14 +80,14 @@ sub auto :Private {
 				show_username => 1,
 				class => 'day',
 				gamedate => 1,
-				body => $lorem->paragraph,
+				plain => $lorem->paragraph,
 				created => DateTime->now->subtract(hours => 1, minutes => 12, seconds => 11),
 			},
 			{
 				id => 9,
 				class => 'day system',
 				gamedate => 1,
-				body => $lorem->sentence,
+				plain => $lorem->sentence,
 				created => DateTime->now->subtract(hours => 1, minutes => 3, seconds => 32),
 			},
 			{
@@ -101,14 +101,14 @@ sub auto :Private {
 				show_username => 1,
 				class => 'day',
 				gamedate => 1,
-				body => $lorem->paragraphs(3),
+				plain => $lorem->paragraphs(3),
 				created => DateTime->now->subtract(minutes => 27, seconds => 43),
 			},
 			{
 				id => 12,	
 				class => 'day system',
 				gamedate => 1,
-				body => $lorem->sentence,
+				plain => $lorem->sentence,
 				created => DateTime->now->subtract(minutes => 27, seconds => 42),
 			},
 			{
@@ -122,11 +122,11 @@ sub auto :Private {
 				show_username => 1,
 				class => 'night',
 				gamedate => 1,
-				body => $lorem->paragraphs(4),
+				plain => $lorem->paragraphs(4),
 				created => DateTime->now->subtract(minutes => 24, seconds => 7),
 			},
 			{
-				id => 15,
+				id => 18,
 				user => {
 					name => 'Sadida',
 				},
@@ -136,7 +136,7 @@ sub auto :Private {
 				show_username => 1,
 				class => 'night',
 				gamedate => 1,
-				body => $lorem->paragraphs(2),
+				plain => $lorem->paragraphs(2),
 				created => DateTime->now->subtract(minutes => 14),
 			},
 		]}

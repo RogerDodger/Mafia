@@ -287,7 +287,7 @@ article.main {
 
 			h1 {
 				margin: 0;
-				padding: 0.5em 1.5em;
+				padding: 0.5em 0.5em 0.5em 1.5em;
 				font-size: 1.4em;
 
 				background-color: #f7f7f7;
@@ -300,6 +300,17 @@ article.main {
 
 			border: 1px solid #ddd;
 			.border-radius(4px 4px 0 0);
+
+			&.preview .close {
+				.button;
+				float: right;
+				font-size: 0.5em;
+
+				.icon {
+					position: relative;
+					top: 0.12em;
+				}
+			}
 
 			article.post {
 
@@ -374,6 +385,15 @@ article.main {
 					}
 				}
 
+				.body {
+					blockquote {
+						margin: 1em 0;
+						padding-left: 0.2em;
+						border-left: 3px solid #ddd;
+						color: #666;
+					}
+				}
+
 				.footer {
 					ul.controls {
 						float: right;
@@ -424,7 +444,7 @@ article.main {
 
 		}
 
-		.add_post {
+		#NewPost {
 
 			border: 1px solid #ddd;
 			.border-radius(4px 4px 0 0);
@@ -489,7 +509,8 @@ article.main {
 				background-color: #f7f7f7;
 				border-top: 1px solid #e5e5e5;
 
-				button {
+				button, 
+				span.preview {
 					.button;
 
 					.icon {
