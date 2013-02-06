@@ -23,6 +23,7 @@ Catalyst::Devel 1.37
 Catalyst::Runtime 5.90013
 Catalyst::Plugin::ConfigLoader
 Catalyst::Plugin::Static::Simple
+Catalyst::Plugin::Session::Store::FastMmap
 Catalyst::Action::RenderView
 Moose
 namespace::autoclean

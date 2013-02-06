@@ -36,7 +36,7 @@ sub preview :Local :Args(0) {
 	local $_ = $c->req->param('text') || '';
 
 	s/</&lt;/g;
-	s`>>([0-9]+)`<a class="cite" href="/post/\1">&gt;&gt;\1</a>`g;
+	s`>>([0-9]+)`<a class="cite" href="/post/$1">&gt;&gt;$1</a>`g;
 	
 	$_ = Text::Markdown->new->markdown($_);
 	# $_ = markdown2html $_;
