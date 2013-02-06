@@ -22,15 +22,15 @@ v0.2 - 03 Feb 2013
   - System messages are slightly darker and have no poster name
 
 Currently using static `team` rows for player teams along with the `player` roles,
-where the teams can be any of Town, Mafia, Nomad, Brakva, and Yakuza, the latter two
-of which are simply Mafia clones, i.e., so you can play with multiple Mafia. (Brakva 
+where the teams can be any of Town, Mafia, Nomad, Bratva, and Yakuza, the latter two
+of which are simply Mafia clones, i.e., so you can play with multiple Mafia. (Bratva 
 are the Russian "brotherhood", and Yakuza the Japanese Mafia, so I figured they'd be 
 decent names.)
 
 Setups are... rather complex. A setup can have multiple "groups" in the case of being
 semi-open. Each group consists of a series of roles, which have assigned teams. (For
 roles that aren't mafia, these will be fixed, but there has to be some way to make
-the Brakva/Yakuza work without duplicating every role twice.)
+the Bratva/Yakuza work without duplicating every role twice.)
 
 How this information can be displayed compactly... I'm not so sure. And entering it?
 With basic HTML forms too? Haha, no way. I don't think I'll lose sleep if people

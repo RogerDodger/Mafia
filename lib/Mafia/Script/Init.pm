@@ -45,6 +45,8 @@ sub run {
 		is_mod   => 1,
 	});
 
+	$schema->resultset('User')->create({ name => 'user', password => 'user' });
+
 	$schema->resultset('Team')->create({ name => $_ }) for qw/Town Mafia Nomad Bratva Yakuza/;
 
 	Catalyst::ScriptRunner->run('Mafia', 'UpdateRoles');
