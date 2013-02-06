@@ -60,6 +60,33 @@ __PACKAGE__->table("setups");
   is_nullable: 1
   size: 64
 
+=head2 descr
+
+  data_type: 'text'
+  is_nullable: 1
+  size: 2048
+
+=head2 allow_nk
+
+  data_type: 'bit'
+  default_value: 1
+  is_nullable: 1
+  size: 1
+
+=head2 allow_nv
+
+  data_type: 'bit'
+  default_value: 1
+  is_nullable: 1
+  size: 1
+
+=head2 day_start
+
+  data_type: 'bit'
+  default_value: 0
+  is_nullable: 1
+  size: 1
+
 =head2 final
 
   data_type: 'bit'
@@ -73,6 +100,12 @@ __PACKAGE__->table("setups");
   default_value: 1
   is_nullable: 1
   size: 1
+
+=head2 plays
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 1
 
 =head2 created
 
@@ -93,10 +126,20 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "title",
   { data_type => "text", is_nullable => 1, size => 64 },
+  "descr",
+  { data_type => "text", is_nullable => 1, size => 2048 },
+  "allow_nk",
+  { data_type => "bit", default_value => 1, is_nullable => 1, size => 1 },
+  "allow_nv",
+  { data_type => "bit", default_value => 1, is_nullable => 1, size => 1 },
+  "day_start",
+  { data_type => "bit", default_value => 0, is_nullable => 1, size => 1 },
   "final",
   { data_type => "bit", default_value => 0, is_nullable => 1, size => 1 },
   "private",
   { data_type => "bit", default_value => 1, is_nullable => 1, size => 1 },
+  "plays",
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
   "created",
   { data_type => "timestamp", is_nullable => 1 },
   "updated",
@@ -178,8 +221,8 @@ Composing rels: L</group_setups> -> group
 __PACKAGE__->many_to_many("groups", "group_setups", "group");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-01-30 08:38:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:471doKhRn3svpV5OgxTgZQ
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-02-06 19:09:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NM6a1w/ogt+Z2FdLxCgZjg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

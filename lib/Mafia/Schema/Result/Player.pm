@@ -78,9 +78,10 @@ __PACKAGE__->table("players");
   is_foreign_key: 1
   is_nullable: 1
 
-=head2 team
+=head2 team_id
 
   data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 0
 
 =head2 life
@@ -104,8 +105,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "vote_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "team",
-  { data_type => "integer", is_nullable => 0 },
+  "team_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "life",
   { data_type => "integer", default_value => 1, is_nullable => 0 },
 );
@@ -225,6 +226,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 team
+
+Type: belongs_to
+
+Related object: L<Mafia::Schema::Result::Team>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "team",
+  "Mafia::Schema::Result::Team",
+  { id => "team_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+);
+
 =head2 user
 
 Type: belongs_to
@@ -266,8 +282,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-01-30 11:22:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ryynKPxoDcO4KnpPoxsqRg
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-02-06 19:09:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+W+g6XUGGq5iAD0Ix3OszA
 
 sub inflate_result {
   my $self = shift;

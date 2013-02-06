@@ -54,6 +54,12 @@ __PACKAGE__->table("group_role");
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 team_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 0
+
 =head2 count
 
   data_type: 'integer'
@@ -65,6 +71,8 @@ __PACKAGE__->add_columns(
   "group_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "role_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "team_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "count",
   { data_type => "integer", is_nullable => 0 },
@@ -78,11 +86,13 @@ __PACKAGE__->add_columns(
 
 =item * L</role_id>
 
+=item * L</team_id>
+
 =back
 
 =cut
 
-__PACKAGE__->set_primary_key("group_id", "role_id");
+__PACKAGE__->set_primary_key("group_id", "role_id", "team_id");
 
 =head1 RELATIONS
 
@@ -116,9 +126,24 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
+=head2 team
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-01-30 08:38:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ETN4ARiosYm4+2N/EcUOQQ
+Type: belongs_to
+
+Related object: L<Mafia::Schema::Result::Team>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "team",
+  "Mafia::Schema::Result::Team",
+  { id => "team_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-02-06 19:09:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:h7ixoy7KhUNVzCEa1BVWIQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

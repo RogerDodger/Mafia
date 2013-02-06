@@ -60,14 +60,31 @@ __PACKAGE__->table("posts");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 is_op
+
+  data_type: 'bit'
+  default_value: 0
+  is_nullable: 1
+  size: 1
+
 =head2 class
 
   data_type: 'text'
   is_nullable: 1
 
-=head2 body
+=head2 plain
 
   data_type: 'text'
+  is_nullable: 1
+
+=head2 render
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 gamedate
+
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 created
@@ -89,10 +106,16 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "user_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "is_op",
+  { data_type => "bit", default_value => 0, is_nullable => 1, size => 1 },
   "class",
   { data_type => "text", is_nullable => 1 },
-  "body",
+  "plain",
   { data_type => "text", is_nullable => 1 },
+  "render",
+  { data_type => "text", is_nullable => 1 },
+  "gamedate",
+  { data_type => "integer", is_nullable => 1 },
   "created",
   { data_type => "timestamp", is_nullable => 1 },
   "updated",
@@ -154,8 +177,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-01-30 05:20:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IzOVSRqrtYMlZeIC9CQqzg
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-02-06 19:09:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iziOIlOlSJone0y/POBPVA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
