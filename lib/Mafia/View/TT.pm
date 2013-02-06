@@ -23,6 +23,14 @@ __PACKAGE__->config(
 	},
 );
 
+$Template::Stash::SCALAR_OPS->{ucfirst} = sub {
+	return ucfirst shift;
+};
+
+$Template::Stash::SCALAR_OPS->{lcfirst} = sub {
+	return lcfirst shift;
+};
+
 my $tidy = HTML::Tidy->new({
 	new_blocklevel_tags => 'article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary',
 	new_inline_tags     => 'time',
