@@ -3,7 +3,7 @@ use Moose;
 use namespace::autoclean;
 use v5.14;
 
-our $VERSION = 'v0.2.6';
+our $VERSION = 'v0.2.7';
 
 use Catalyst::Runtime 5.80;
 
@@ -16,7 +16,6 @@ __PACKAGE__->config(
 );
 
 __PACKAGE__->setup(qw/
-    -Debug
     Static::Simple
 
 	Session
