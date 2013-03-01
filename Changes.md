@@ -1,13 +1,19 @@
 Mafia.pm changelog
 ==================
 
-v0.3
-----
+v0.3 - 01 Mar 2013
+------------------
 
 - post/submit.html (and associated style) mostly complete
   - Bold/italics/quote/link buttons working
   - Reply buttons working
   - Post preview working
+- Logger added, writes to file in production and to STDERR in development (-Debug)
+- Added _markup() to Result::Post, which renders posts from user input into HTML
+- Added version() to TraitFor::Script
+- New script `mafia_compile_less.pl`
+- Added Mafia::URI which acts as a Catalyst plugin, providing a uri_for_glob() routine
+- Config is application agnostic, and application does not install so that scripts work more predictably
 
 v0.2 - 03 Feb 2013
 ------------------

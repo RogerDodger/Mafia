@@ -1,9 +1,6 @@
 package Mafia::Controller::Post;
 use Moose;
 use namespace::autoclean;
-require Text::Markdown;
-require Text::SmartyPants;
-use DR::SunDown;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -33,16 +30,10 @@ sub index :Path :Args(0) {
 sub preview :Local :Args(0) {
 	my ( $self, $c ) = @_;
 
-	local $_ = $c->req->param('text') || '';
+	my $text = $c->req->param('text') || '';
+	my $html = $c->model('DB::Post')->result_class->_markup($text)->{html};
 
-	s/</&lt;/g;
-	s`>>([0-9]+)`<a class="cite" href="/post/$1">&gt;&gt;$1</a>`g;
-	
-	$_ = Text::Markdown->new->markdown($_);
-	# $_ = markdown2html $_;
-	$_ = Text::SmartyPants::process($_, 2);
-
-	$c->res->body($_);
+	$c->res->body($html);
 }
 
 =head1 AUTHOR

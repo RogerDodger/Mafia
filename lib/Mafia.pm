@@ -3,7 +3,7 @@ use Moose;
 use namespace::autoclean;
 use v5.14;
 
-our $VERSION = 'v0.2.9';
+our $VERSION = 'v0.3.0';
 
 use Catalyst::Runtime 5.80;
 
@@ -11,12 +11,22 @@ use Catalyst;
 
 extends 'Catalyst';
 
-__PACKAGE__->config(
-    %{ Mafia::Config->load },
-);
+my $config = Mafia::Config->load;
+
+$ENV{TZ} = $config->{timezone} || 'UTC';
+
+__PACKAGE__->config($config);
+
+if( !$ENV{CATALYST_DEBUG} ) {
+	require Mafia::Log;
+
+    my $logger = Mafia::Log->new;
+    $logger->path(__PACKAGE__->path_to('log'));
+
+    __PACKAGE__->log($logger);
+}
 
 __PACKAGE__->setup(qw/
-	-Debug
     Static::Simple
 
 	Session
@@ -24,6 +34,8 @@ __PACKAGE__->setup(qw/
 	Session::State::Cookie
 
 	Authentication
+
+	+Mafia::URI
 /);
 
 =head1 NAME

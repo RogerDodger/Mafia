@@ -180,6 +180,40 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-02-06 19:09:21
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iziOIlOlSJone0y/POBPVA
 
+require Mafia::Helpers;
+require Text::Markdown;
+require Text::SmartyPants;
+
+sub _markup {
+  my $self = shift;
+  local $_ = join "", @_;
+  my @cites;
+
+  s/</&lt;/g;
+  s/^#/\\#/mg;
+
+  $_ = Text::Markdown->new->markdown($_);
+  $_ = Text::SmartyPants->process($_, 2);
+
+  my $tokens = Text::SmartyPants::_tokenize($_);
+
+  my $skip = 0;
+  for my $token (@$tokens) {
+    if($token->[0] eq 'tag') {
+      if($token->[1] =~ m`<(/?)(?:pre|code|kbd|a)[\s>]`) {
+        $skip += $1 eq '/' ? -1 : 1;
+      }
+    }
+    elsif($skip == 0) {
+      $token->[1] =~ s`(?<!&)#([0-9]+)\b`
+        push @cites, $1;
+        qq{<a class="cite" href="/post/$1">#$1</a>};
+      `eg;
+    }
+  }
+
+  return { html => join("", map { $_->[1] } @$tokens), cites => \@cites };
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

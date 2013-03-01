@@ -30,10 +30,12 @@ sub load {
 	else {
 		my($local_config) = YAML::LoadFile( $fn );
 
-		return {
+		my $config = {
 			%defaults, 
 			ref $local_config eq 'HASH' ? %$local_config : ()
 		};
+
+		return $config;
 	}
 }
 

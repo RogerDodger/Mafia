@@ -1,6 +1,7 @@
 package Mafia::Controller::Root;
 use Moose;
 use namespace::autoclean;
+no warnings 'uninitialized';
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -28,6 +29,21 @@ sub auto :Private {
 		now   => DateTime->now,
 		v     => $Mafia::VERSION,
 	);
+
+	my $so = $c->req->uri->host eq eval { URI->new( $c->req->referer )->host };
+
+	$c->log->info( sprintf "[%s] %s (%s) - %s" . ( $so ? "" : " - %s" ), 
+		$c->req->method, 
+		$c->req->address,
+		( $c->user ? $c->user->get('username') : 'guest' ),
+		$c->req->uri->path,
+		$c->req->referer || 'no referer',
+	) unless $so && $c->stash->{no_req_log};
+
+	if($c->req->method eq 'POST') {
+		$c->req->{parameters} = {} if $c->config->{read_only};
+		$c->detach('index') if !$so;
+	}
 
 	$c->stash(
 		player => {

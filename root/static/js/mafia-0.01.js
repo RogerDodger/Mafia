@@ -59,7 +59,7 @@ $(document).ready(function() {
 		var textarea = $('#NewPost').find('textarea');
 		var selection = textarea.getSelection();
 
-		var link = ">>" + $(this).parentsUntil('.post').parent().find('.permalink a').attr('href').match(/\d+$/) + "\n";
+		var link = "#" + $(this).parentsUntil('.post').parent().find('.permalink a').attr('href').match(/\d+$/) + "\n";
 
 		selection.text = link;
 		selection.end = selection.start += link.length;

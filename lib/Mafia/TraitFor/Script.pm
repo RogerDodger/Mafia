@@ -36,4 +36,17 @@ sub _connect {
 	return $class->connect($dsn, $username, $password, \%connect_info);
 }
 
+sub version {
+	my $self = shift;
+
+	open R, "<", file($self->config->{home}, 'lib', 'Mafia.pm');
+	while(<R>) {
+		if(/\$VERSION = (.+?);/) {
+			return eval $1;
+		}
+	}
+
+	return 0;
+}
+
 1;

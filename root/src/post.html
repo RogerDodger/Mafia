@@ -1,4 +1,4 @@
-<article class="post [% post.class %]" id="[% loop.count || post.id %]">
+<article class="post [% post.class %]" id="[% post.id %]">
 	<div class="meta">
 		<div class="poster">
 			[%- IF post.show_username %]
@@ -18,7 +18,7 @@
 		<div class="posttime">[% post.created.duration_since_now %]</div>
 
 		<div class="permalink">
-			<a href="[% c.uri_for('/post/' _ post.id ) %]">#[% loop.count || post.id %]</a>
+			<a href="[% c.uri_for('/post/' _ post.id ) %]">#[% post.id %]</a>
 		</div>
 
 		<div class="clearfix"></div>

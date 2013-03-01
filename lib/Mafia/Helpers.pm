@@ -1,5 +1,5 @@
 package Mafia::Helpers;
-
+use utf8;
 use base 'Exporter';
 
 our @EXPORT_OK = qw/simple_uri/;
