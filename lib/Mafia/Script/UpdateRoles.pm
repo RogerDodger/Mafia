@@ -13,7 +13,7 @@ sub run {
 
 	my $rs = $self->schema->resultset('Role');
 
-	my @roles = map { substr((File::Spec->splitpath($_))[-1], 0, -3) }
+	my @roles = map { substr(file($_)->basename, 0, -3) }
 		glob file($self->config->{home}, qw/lib Mafia Schema Result Player *.pm/); 
 
 	$rs->create({ name => $_ }) for grep { !$rs->find({ name => $_ }) } @roles;

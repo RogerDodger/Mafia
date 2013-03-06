@@ -35,7 +35,7 @@ sub auto :Private {
 	$c->log->info( sprintf "[%s] %s (%s) - %s" . ( $so ? "" : " - %s" ), 
 		$c->req->method, 
 		$c->req->address,
-		( $c->user ? $c->user->get('username') : 'guest' ),
+		( $c->user ? $c->user->get('name') : 'guest' ),
 		$c->req->uri->path,
 		$c->req->referer || 'no referer',
 	) unless $so && $c->stash->{no_req_log};
@@ -54,7 +54,6 @@ sub auto :Private {
 
 	require Text::Lorem::More;
 	my $lorem = Text::Lorem::More->new;
-	
 	$c->stash(
 		posts => { all => [
 			{

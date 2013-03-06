@@ -4,6 +4,7 @@
 
 function replaceSelection(e, newSelection) {
 	if('selectionStart' in e) {
+		e.focus();
 		e.value = e.value.substr(0, e.selectionStart) + newSelection.text + e.value.substr(e.selectionEnd, e.value.length);
 
 		e.selectionStart = newSelection.start;

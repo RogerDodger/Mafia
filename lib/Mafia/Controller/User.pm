@@ -21,12 +21,12 @@ Catalyst Controller.
 =cut
 
 sub login :Local :Args(0) {
-    my ( $self, $c ) = @_;
+	my ( $self, $c ) = @_;
 
-    my $username = $c->req->param('username') || 'user';
-    my $password = $c->req->param('password') || 'user';
+	my $username = $c->req->param('username') || 'user';
+	my $password = $c->req->param('password') || 'user';
 
-    $c->authenticate({ name => $username, password => $password });
+	$c->authenticate({ name => $username, password => $password });
 
 	$c->res->redirect( $c->req->referer || $c->uri_for('/') );
 }

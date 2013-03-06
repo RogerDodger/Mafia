@@ -30,10 +30,12 @@ sub index :Path :Args(0) {
 sub preview :Local :Args(0) {
 	my ( $self, $c ) = @_;
 
-	my $text = $c->req->param('text') || '';
-	my $html = $c->model('DB::Post')->result_class->_markup($text)->{html};
+	my $text   = $c->req->param('text') || '';
+	my $render = $c->model('DB::Post')->result_class->_render($text);
 
-	$c->res->body($html);
+	$c->log->debug($render->{html});
+
+	$c->res->body($render->{html});
 }
 
 =head1 AUTHOR

@@ -1,6 +1,14 @@
 Mafia.pm changelog
 ==================
 
+v0.4
+----
+
+- Added Mafia::Markdown which inherits and mofidies Markdown for our purposes
+  - proper autolinking of URLs and citations ("#15 says. . .")
+- Width variables in stylesheet changed to being measured in em
+- renamed _markup() to _render(), which now also returns the IDs of all cites
+
 v0.3 - 01 Mar 2013
 ------------------
 

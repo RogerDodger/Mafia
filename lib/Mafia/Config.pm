@@ -47,7 +47,7 @@ __END__
 	home => $home,
 	
 	default_view => 'TT',
-	
+	encoding => 'UTF-8',
 	'View::TT' => { 
 		INCLUDE_PATH => [ dir($home, 'root', 'src' ) ],
 	},

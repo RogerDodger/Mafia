@@ -142,9 +142,9 @@ textarea {
 
 .maxwidth {
 	width: 100%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 .reset {
@@ -183,12 +183,12 @@ h1 {
 	font-family: "Museo Slab", Georgia, serif;
 }
 
-@site-width:    1000px;
-@aside-width:   240px;
-@content-width: (@site-width - @aside-width - 32px);
+@site-width:    60em;
+@aside-width:   15em;
+@content-width: (@site-width - @aside-width - 2em);
 
 body {
-	min-width: (@site-width + 80px);
+	min-width: (@site-width + 2em);
 }
 
 nav.top {
@@ -328,9 +328,11 @@ article.main {
 				}
 
 				&.day .gamedate:before {
+					/* Sun */
 					content: "\1F506";
 				}
 				&.night .gamedate:before {
+					/* Moon */
 					content: "\263D";
 				}
 
@@ -389,7 +391,7 @@ article.main {
 					blockquote {
 						margin: 1em 0;
 						padding-left: 0.2em;
-						border-left: 3px solid #ddd;
+						border-left: 3px solid #cdf;
 						color: #666;
 					}
 
@@ -591,7 +593,7 @@ footer {
 	div.container {
 		width: @site-width;
 		margin: 0 auto;
-		padding: 2em;
+		padding: 2em 1em;
 		border-top: 1px solid #e5e5e5;
 	}
 
